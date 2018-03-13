@@ -34,6 +34,14 @@ rp(options)
         // API call failed...
     });
 ```
+
+##### logging sample
+```
+2018-03-13T22:20:21.308Z - info: [request-promise-retry] calling http://adadadadad.com/ with retry 3
+2018-03-13T22:20:21.899Z - info: [request-promise-retry] Encountered error Error: getaddrinfo ENOTFOUND adadadadad.com adadadadad.com:80 for GET request to http://adadadadad.com/, retry count 3
+2018-03-13T22:20:21.904Z - info: [request-promise-retry] Encountered error Error: getaddrinfo ENOTFOUND adadadadad.com adadadadad.com:80 for GET request to http://adadadadad.com/, retry count 2
+2018-03-13T22:20:21.907Z - info: [request-promise-retry] Encountered error Error: getaddrinfo ENOTFOUND adadadadad.com adadadadad.com:80 for GET request to http://adadadadad.com/, retry count 1
+```
 For rest of samples, please refer [`request-promise` documentation](https://github.com/request/request-promise).
 
 ### Installation
