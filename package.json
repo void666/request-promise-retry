@@ -14,11 +14,18 @@
   "keywords": [
     "retry",
     "http",
+    "request-promise",
     "request-promise-retry",
+    "request-retry-promise",
+    "promise-request-retry",
     "request",
     "retry",
-    "request",
-    "promise"
+    "promised-request",
+    "xhr",
+    "https",
+    "then",
+    "thenable",
+    "bluebird"
   ],
   "author": "Sushim Mukul Dutta",
   "license": "MIT",

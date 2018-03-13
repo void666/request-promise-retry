@@ -1,7 +1,6 @@
 ## request-promise-retry 
 #### `npm : promise-request-retry`
 [![npm version](https://badge.fury.io/js/promise-request-retry.svg)](https://badge.fury.io/js/promise-request-retry)
-[![npm downloads](https://img.shields.io/npm/dt/promise-request-retry.svg)](https://img.shields.io/npm/dt/promise-request-retry)
 [![coverage status](https://coveralls.io/repos/github/void666/request-promise-retry/badge.svg)](https://coveralls.io/github/void666/request-promise-retry)
 [![build status](https://travis-ci.org/void666/request-promise-retry.svg?branch=master)](https://travis-ci.org/void666/request-promise-retry)
 
