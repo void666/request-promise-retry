@@ -41,7 +41,17 @@ class rpRetry {
 
     static rp(options) {
         if (options.retry) {
-            return rpRetry._rpRetry(options);
+            if (typeof options.retry === 'number') {
+                if (options.retry < 0) {
+                    return Promise.reject(new Error(`Retry count must be positive integer`));
+                }
+                return rpRetry._rpRetry(options);
+            } else if (typeof options.retry === 'boolean') {
+                options.retry = 1;
+                return rpRetry._rpRetry(options);
+            } else {
+                return Promise.reject(new Error(`Supports boolean or positive integer`));
+            }
         }
         return rpRetry._rp(options);
     }
