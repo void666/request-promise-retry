@@ -1,6 +1,7 @@
-## request-promise-retry
-[![npm version](https://badge.fury.io/js/request-promise-retry.svg)](https://badge.fury.io/js/request-promise-retry)
-[![npm downloads](https://img.shields.io/npm/dt/request-promise-retry.svg)](https://img.shields.io/npm/dt/request-promise-retry.svg)
+## request-promise-retry 
+### `npm : promise-request-retry`
+[![npm version](https://badge.fury.io/js/promise-request-retry.svg)](https://badge.fury.io/js/promise-request-retry)
+[![npm downloads](https://img.shields.io/npm/dt/promise-request-retry.svg)](https://img.shields.io/npm/dt/promise-request-retry)
 [![coverage status](https://coveralls.io/repos/github/void666/request-promise-retry/badge.svg?branch=master)](https://coveralls.io/github/void666/request-promise-retry?branch=master)
 [![build status](https://travis-ci.org/void666/request-promise-retry.svg?branch=master)](https://travis-ci.org/void666/request-promise-retry)
 
@@ -13,7 +14,7 @@ Simple wrapper on top of [request-promise](https://github.com/request/request-pr
 
 #### GET Request sample with retry
 ```
-var rp = require('request-promise-retry');
+var rp = require('promise-request-retry');
 var options = {
     uri: 'https://api.github.com/user/repos',
     qs: {
@@ -37,7 +38,7 @@ rp(options)
 For rest of samples, please refer [`request-promise` documentation](https://github.com/request/request-promise).
 
 ### Installation
-`npm install request-promise-retry`
+`npm install promise-request-retry`
 
 ### Test
 `npm test`
