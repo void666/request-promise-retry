@@ -28,7 +28,6 @@
     "async": "^2.6.0",
     "bluebird": "^3.5.1",
     "coveralls": "^3.0.0",
-    "lodash": "^4.17.4",
     "req-cwd": "^2.0.0",
     "request": "^2.85.0",
     "request-promise": "^4.2.2",
