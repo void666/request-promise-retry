@@ -1,37 +1,43 @@
-## Welcome to GitHub Pages
+## request-promise-retry
+[![npm version](https://badge.fury.io/js/request-promise-retry.svg)](https://badge.fury.io/js/request-promise-retry)
+[![npm downloads](https://img.shields.io/npm/dt/request-promise-retry.svg)](https://img.shields.io/npm/dt/request-promise-retry.svg)
+[![coverage status](https://coveralls.io/repos/github/void666/request-promise-retry/badge.svg?branch=master)](https://coveralls.io/github/void666/request-promise-retry?branch=master)
+[![build status](https://travis-ci.org/void666/request-promise-retry.svg?branch=master)](https://travis-ci.org/void666/request-promise-retry)
 
-You can use the [editor on GitHub](https://github.com/void666/request-promise-retry/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+Simple wrapper on top of [request-promise](https://github.com/request/request-promise) to replicate retry mechanism, i.e, it will try to reprocess the request till a valid response is obtained, or the number of retrys is exhausted. Supports all options from request-promise.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+### Usage
+-  additional parameter `retry` needed in `request-promise` options.
+- `retry` supports boolean (defaults to `1` retry) and positive integer.
+-  in order to ignore retry or use generic`request-promise`,just don't specify the `retry` parameter.
 
-### Markdown
-
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
+#### GET Request sample with retry
 ```
+var rp = require('request-promise-retry');
+var options = {
+    uri: 'https://api.github.com/user/repos',
+    qs: {
+        access_token: 'xxxxx xxxxx' // -> uri + '?access_token=xxxxx%20xxxxx'
+    },
+    headers: {
+        'User-Agent': 'Request-Promise'
+    },
+    json: true // Automatically parses the JSON string in the response, 
+    retry : 2 // will retry the call twice, in case of error.
+};
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+rp(options)
+    .then(function (repos) {
+        console.log('User has %d repos', repos.length);
+    })
+    .catch(function (err) {
+        // API call failed...
+    });
+```
+For rest of samples, please refer [`request-promise` documentation](https://github.com/request/request-promise).
 
-### Jekyll Themes
+### Installation
+`npm install request-promise-retry`
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/void666/request-promise-retry/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+### Test
+`npm test`
