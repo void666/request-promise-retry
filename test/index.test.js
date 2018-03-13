@@ -6,6 +6,10 @@ const optionsWithRetryFail = {
     method: 'GET',
     retry: 3
 };
+const optionsWithoutRetryFail = {
+    uri: 'http://adadadadad.com/',
+    method: 'GET'
+};
 const optionsWithRetry = {
     uri: 'https://developer.github.com/v3/activity/events/#list-public-events-performed-by-a-user',
     method: 'GET',
@@ -17,23 +21,29 @@ const optionsWithoutRetry = {
     method: 'GET'
 };
 
-describe('rp', function () {
-    it('it run with retry', () => {
+describe('request-promise-retry', function () {
+    it('should  pass, with retry options', () => {
         return rp(optionsWithRetry)
             .then(data => {
                 expect(data.error).equal(undefined);
             });
     });
-    it('it run with retry, and fail 3 times', () => {
+    it('fail and retry 3 times', () => {
         return rp(optionsWithRetryFail)
             .catch(err => {
                 expect(err.error.code).equal('ENOTFOUND');
             });
     });
-    it('it run without retry', () => {
+    it('should pass, without retry options', () => {
         return rp(optionsWithoutRetry)
             .then(data => {
                 expect(data.error).equal(undefined);
+            });
+    });
+    it('should fail, without retry options', () => {
+        return rp(optionsWithoutRetryFail)
+            .catch(err => {
+                expect(err.error.code).equal('ENOTFOUND');
             });
     });
 });

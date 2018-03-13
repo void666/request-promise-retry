@@ -20,7 +20,6 @@ class rpRetry {
                     if (tryCount) {
                         return fetchDataWithRetry(tryCount);
                     }
-                    // return reject(result);
                     return Promise.reject(err);
                 });
         };
@@ -29,7 +28,15 @@ class rpRetry {
 
     static _rp(options) {
         logger.info(`calling ${options.uri} without retries`);
-        return requestPromise(options);
+        return requestPromise(options)
+            .then(result => {
+                logger.info(`Result obtained for ${options.method} request to ${options.uri}`);
+                return Promise.resolve(result);
+            })
+            .catch(err => {
+                logger.info(`Encountered error ${err.message} for ${options.method} request to ${options.uri}`);
+                return Promise.reject(err);
+            });
     }
 
     static rp(options) {
