@@ -1,6 +1,6 @@
 {
   "name": "promise-request-retry",
-  "version": "0.0.6",
+  "version": "1.0.0",
   "description": "Simple wrapper on request-promise for retry mechanism",
   "main": "index.js",
   "scripts": {
