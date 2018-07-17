@@ -18,7 +18,7 @@ const optionsWithRetry = {
 const optionsWithRetryAndLogging = {
     uri: 'https://developer.github.com/v3/activity/events/#list-public-events-performed-by-a-user',
     method: 'GET',
-    verboseLogging: true,
+    verbose_logging: true,
     retry: 4
 };
 
@@ -29,7 +29,7 @@ const optionsWithoutRetry = {
 const optionsWithoutRetryWithLogging = {
     uri: 'https://developer.github.com/v3/activity/events/#list-public-events-performed-by-a-user',
     method: 'GET',
-    verboseLogging: true
+    verbose_logging: true
 };
 const optionsBadRetry1 = {
     uri: 'https://developer.github.com/v3/activity/events/#list-public-events-performed-by-a-user',
