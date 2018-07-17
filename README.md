@@ -25,6 +25,7 @@ var options = {
     },
     json: true // Automatically parses the JSON string in the response, 
     retry : 2 // will retry the call twice, in case of error.
+    verbose_logging : false // will log errors only, if set to be true, will log all actions
 };
 
 rp(options)
