@@ -5,7 +5,7 @@ const logger = require('./modules/logger')('request-promise-retry');
 
 class rpRetry {
     static _rpRetry(options) {
-        if(options.verboseLogging) {
+        if(options.verbose_logging) {
           logger.info(`calling ${options.uri} with retry ${options.retry}`);
         }
         const tries = options.retry || 1;
