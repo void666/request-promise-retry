@@ -31,7 +31,7 @@ class rpRetry {
     }
 
     static _rp(options) {
-        if(options.verboseLogging) {
+        if(options.verbose_logging) {
           logger.info(`calling ${options.uri} without retries`);
         }
         return requestPromise(options)
