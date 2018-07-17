@@ -15,10 +15,21 @@ const optionsWithRetry = {
     method: 'GET',
     retry: 4
 };
+const optionsWithRetryAndLogging = {
+    uri: 'https://developer.github.com/v3/activity/events/#list-public-events-performed-by-a-user',
+    method: 'GET',
+    verbose_logging: true,
+    retry: 4
+};
 
 const optionsWithoutRetry = {
     uri: 'https://developer.github.com/v3/activity/events/#list-public-events-performed-by-a-user',
     method: 'GET'
+};
+const optionsWithoutRetryWithLogging = {
+    uri: 'https://developer.github.com/v3/activity/events/#list-public-events-performed-by-a-user',
+    method: 'GET',
+    verbose_logging: true
 };
 const optionsBadRetry1 = {
     uri: 'https://developer.github.com/v3/activity/events/#list-public-events-performed-by-a-user',
@@ -43,6 +54,12 @@ describe('request-promise-retry', function () {
                 expect(data.error).equal(undefined);
             });
     });
+    it('should  pass, with retry options, with verbose logging', () => {
+        return rp(optionsWithRetryAndLogging)
+            .then(data => {
+                expect(data.error).equal(undefined);
+            });
+    });
     it('fail and retry 3 times', () => {
         return rp(optionsWithRetryFail)
             .catch(err => {
@@ -51,6 +68,12 @@ describe('request-promise-retry', function () {
     });
     it('should pass, without retry options', () => {
         return rp(optionsWithoutRetry)
+            .then(data => {
+                expect(data.error).equal(undefined);
+            });
+    });
+    it('should pass, without retry options, with logging', () => {
+        return rp(optionsWithoutRetryWithLogging)
             .then(data => {
                 expect(data.error).equal(undefined);
             });
