@@ -13,7 +13,7 @@ class rpRetry {
         const fetchDataWithRetry = tryCount => {
             return requestPromise(options)
                 .then(result => {
-                    if(options.verboseLogging) {
+                    if(options.verbose_logging) {
                       logger.info(`Result obtained for ${options.method} request to ${options.uri}`);
                     }
                     return Promise.resolve(result);
@@ -36,7 +36,7 @@ class rpRetry {
         }
         return requestPromise(options)
             .then(result => {
-                if(options.verboseLogging) {
+                if(options.verbose_logging) {
                   logger.info(`Result obtained for ${options.method} request to ${options.uri}`);
                 }
                 return Promise.resolve(result);
