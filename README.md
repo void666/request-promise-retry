@@ -5,7 +5,7 @@
 [![build status](https://travis-ci.org/void666/request-promise-retry.svg?branch=master)](https://travis-ci.org/void666/request-promise-retry)
 [![npm downloads](https://img.shields.io/npm/dt/promise-request-retry.svg)](https://img.shields.io/npm/dt/promise-request-retry)
 
-Simple wrapper on top of [request-promise](https://github.com/request/request-promise) to replicate retry mechanism, i.e, it will try to reprocess the request till a valid response is obtained, or the number of retrys is exhausted. Supports all options from request-promise.
+Simple wrapper on top of [request-promise](https://github.com/request/request-promise) to replicate retry mechanism, i.e, it will try to reprocess the request with no pause till a valid response is obtained, or the number of retrys is exhausted. Supports all options from request-promise.
 
 ### Usage
 -  additional parameter `retry` needed in `request-promise` options.
