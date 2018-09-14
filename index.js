@@ -5,16 +5,16 @@ const logger = require('./modules/logger')('request-promise-retry');
 
 class rpRetry {
     static _rpRetry(options) {
-        if(options.verbose_logging) {
-          logger.info(`calling ${options.uri} with retry ${options.retry}`);
+        if (options.verbose_logging) {
+            logger.info(`calling ${options.uri} with retry ${options.retry}`);
         }
         const tries = options.retry || 1;
         delete options.retry;
         const fetchDataWithRetry = tryCount => {
             return requestPromise(options)
                 .then(result => {
-                    if(options.verbose_logging) {
-                      logger.info(`Result obtained for ${options.method} request to ${options.uri}`);
+                    if (options.verbose_logging) {
+                        logger.info(`Result obtained for ${options.method} request to ${options.uri}`);
                     }
                     return Promise.resolve(result);
                 })
@@ -31,13 +31,13 @@ class rpRetry {
     }
 
     static _rp(options) {
-        if(options.verbose_logging) {
-          logger.info(`calling ${options.uri} without retries`);
+        if (options.verbose_logging) {
+            logger.info(`calling ${options.uri} without retries`);
         }
         return requestPromise(options)
             .then(result => {
-                if(options.verbose_logging) {
-                  logger.info(`Result obtained for ${options.method} request to ${options.uri}`);
+                if (options.verbose_logging) {
+                    logger.info(`Result obtained for ${options.method} request to ${options.uri}`);
                 }
                 return Promise.resolve(result);
             })
