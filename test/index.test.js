@@ -102,4 +102,18 @@ describe('request-promise-retry', function () {
                 expect(data.error).equal(undefined);
             });
     });
+    it('should pass, retry with exponential backoff', () => {
+        // failure should take a bit of time to happen
+        const startTime = new Date();
+        return rp({
+            uri: 'http://adadadadad.com/',
+            method: 'GET',
+            retry: 5,
+            delay: 200,
+            factor: 1.1 //
+        })
+            .catch(error => {
+                expect(new Date() - startTime).to.be.above((5 - 1) * 200);
+            });
+    });
 });
