@@ -22,7 +22,7 @@ class rpRetry {
                     logger.info(`Encountered error ${err.message} for ${options.method} request to ${options.uri}, retry count ${tryCount}`);
                     tryCount -= 1;
                     if (tryCount) {
-                        let delay = options.delay || 100; // default delay between retries
+                        let delay = options.delay || 100; // default ms delay between retries
                         if (options.factor) {
                             delay *= options.factor;
                         }
