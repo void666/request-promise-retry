@@ -108,12 +108,12 @@ describe('request-promise-retry', function () {
         return rp({
             uri: 'http://adadadadad.com/',
             method: 'GET',
-            retry: 5,
-            delay: 200,
-            factor: 1.1 //
+            retry: 4,
+            delay: 30,
+            factor: 10 // 0 + 30 + 300 + 3000
         })
             .catch(error => {
-                expect(new Date() - startTime).to.be.above((5 - 1) * 200);
+                expect(new Date() - startTime).to.be.above(0 + 30 + 300 + 3000);
             });
     });
 });

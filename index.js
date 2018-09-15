@@ -5,12 +5,21 @@ const logger = require('./modules/logger')('request-promise-retry');
 
 class rpRetry {
     static _rpRetry(options) {
-        if(options.verbose_logging) {
-          logger.info(`calling ${options.uri} with retry ${options.retry}`);
-        }
+
         const tries = options.retry || 1;
         delete options.retry;
-        const fetchDataWithRetry = tryCount => {
+
+        const delay = options.delay || 100; // default ms delay between retries
+        delete options.delay;
+
+        const factor = options.factor || 1; // If absent, delay will always be the same.
+        delete options.factor;
+
+        if(options.verbose_logging) {
+          logger.info(`calling ${options.uri} with retry ${tries}, initial delay=${delay}, factor=${factor}`);
+        }
+
+        const fetchDataWithRetry = (tryCount, delay) => {
             return requestPromise(options)
                 .then(result => {
                     if(options.verbose_logging) {
@@ -22,21 +31,17 @@ class rpRetry {
                     logger.info(`Encountered error ${err.message} for ${options.method} request to ${options.uri}, retry count ${tryCount}`);
                     tryCount -= 1;
                     if (tryCount) {
-                        let delay = options.delay || 100; // default ms delay between retries
-                        if (options.factor) {
-                            delay *= options.factor;
-                        }
                         return new Promise((resolve, reject) => {
                             setTimeout(() => {
-                                logger.debug(`waiting for ${delay} ms before next retry for ${options.uri}`);
-                                resolve(fetchDataWithRetry(tryCount));
+                                logger.debug(`waiting for ${delay} ms before next retry for ${options.uri}. Next wait ${delay*factor}`);
+                                resolve(fetchDataWithRetry(tryCount, delay*factor));
                             }, delay);
                         });
                     }
                     return Promise.reject(err);
                 });
         };
-        return fetchDataWithRetry(tries);
+        return fetchDataWithRetry(tries, delay);
     }
 
     static _rp(options) {
