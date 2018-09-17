@@ -6,8 +6,8 @@
   "scripts": {
     "test": "node_modules/gulp/bin/gulp.js test",
     "coveralls": "cat ./coverage/lcov.info | ./node_modules/.bin/coveralls",
-    "eslint": "eslint test/. index.js",
-    "eslint-fix": "eslint test/. index.js --fix"
+    "lint-check": "gulp check",
+    "lint-fix": "gulp fix"
   },
   "repository": {
     "type": "git",
