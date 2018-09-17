@@ -15,15 +15,15 @@ class rpRetry {
         const factor = options.factor || 1; // If absent, delay will always be the same.
         delete options.factor;
 
-        if(options.verbose_logging) {
-          logger.info(`calling ${options.uri} with retry ${tries}, initial delay=${delay}, factor=${factor}`);
+        if (options.verbose_logging) {
+            logger.info(`calling ${options.uri} with retry ${tries}, initial delay=${delay}, factor=${factor}`);
         }
 
         const fetchDataWithRetry = (tryCount, delay) => {
             return requestPromise(options)
                 .then(result => {
-                    if(options.verbose_logging) {
-                      logger.info(`Result obtained for ${options.method} request to ${options.uri}`);
+                    if (options.verbose_logging) {
+                        logger.info(`Result obtained for ${options.method} request to ${options.uri}`);
                     }
                     return Promise.resolve(result);
                 })
@@ -33,8 +33,8 @@ class rpRetry {
                     if (tryCount) {
                         return new Promise((resolve, reject) => {
                             setTimeout(() => {
-                                logger.debug(`waiting for ${delay} ms before next retry for ${options.uri}. Next wait ${delay*factor}`);
-                                resolve(fetchDataWithRetry(tryCount, delay*factor));
+                                logger.debug(`waiting for ${delay} ms before next retry for ${options.uri}. Next wait ${delay * factor}`);
+                                resolve(fetchDataWithRetry(tryCount, delay * factor));
                             }, delay);
                         });
                     }
@@ -45,13 +45,13 @@ class rpRetry {
     }
 
     static _rp(options) {
-        if(options.verbose_logging) {
-          logger.info(`calling ${options.uri} without retries`);
+        if (options.verbose_logging) {
+            logger.info(`calling ${options.uri} without retries`);
         }
         return requestPromise(options)
             .then(result => {
-                if(options.verbose_logging) {
-                  logger.info(`Result obtained for ${options.method} request to ${options.uri}`);
+                if (options.verbose_logging) {
+                    logger.info(`Result obtained for ${options.method} request to ${options.uri}`);
                 }
                 return Promise.resolve(result);
             })
