@@ -23,9 +23,10 @@ var options = {
     headers: {
         'User-Agent': 'Request-Promise'
     },
-    json: true // Automatically parses the JSON string in the response, 
-    retry : 2 // will retry the call twice, in case of error.
-    verbose_logging : false // will log errors only, if set to be true, will log all actions
+    json: true, // Automatically parses the JSON string in the response, 
+    retry : 2, // will retry the call twice, in case of error.
+    verbose_logging : false, // will log errors only, if set to be true, will log all actions
+    accepted: [ 400, 404 ] // Accepted HTTP Status codes (will not retry if request response has any of these HTTP Status Code)
 };
 
 rp(options)
