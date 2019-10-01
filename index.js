@@ -5,20 +5,26 @@ const logger = require('./modules/logger')('request-promise-retry');
 
 class rpRetry {
     static _rpRetry(options) {
-        if(options.verbose_logging) {
-          logger.info(`calling ${options.uri} with retry ${options.retry}`);
+        if (options.verbose_logging) {
+            logger.info(`calling ${options.uri} with retry ${options.retry}`);
         }
         const tries = options.retry || 1;
         delete options.retry;
         const fetchDataWithRetry = tryCount => {
             return requestPromise(options)
                 .then(result => {
-                    if(options.verbose_logging) {
-                      logger.info(`Result obtained for ${options.method} request to ${options.uri}`);
+                    if (options.verbose_logging) {
+                        logger.info(`Result obtained for ${options.method} request to ${options.uri}`);
                     }
                     return Promise.resolve(result);
                 })
                 .catch(err => {
+                    err.accepted = false;
+                    if (options.accepted && options.accepted.indexOf(err.statusCode) > -1) {
+                        err.accepted = true;
+                        return Promise.reject(err);
+                    }
+
                     logger.info(`Encountered error ${err.message} for ${options.method} request to ${options.uri}, retry count ${tryCount}`);
                     tryCount -= 1;
                     if (tryCount) {
@@ -31,13 +37,13 @@ class rpRetry {
     }
 
     static _rp(options) {
-        if(options.verbose_logging) {
-          logger.info(`calling ${options.uri} without retries`);
+        if (options.verbose_logging) {
+            logger.info(`calling ${options.uri} without retries`);
         }
         return requestPromise(options)
             .then(result => {
-                if(options.verbose_logging) {
-                  logger.info(`Result obtained for ${options.method} request to ${options.uri}`);
+                if (options.verbose_logging) {
+                    logger.info(`Result obtained for ${options.method} request to ${options.uri}`);
                 }
                 return Promise.resolve(result);
             })
