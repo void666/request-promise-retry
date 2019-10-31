@@ -46,6 +46,18 @@ const optionsBooleanRetry = {
     method: 'GET',
     retry: true
 };
+const optionsDontRetryAcceptedOptions = {
+    uri: 'https://httpstat.us/404',
+    method: 'GET',
+    retry: true,
+    accepted: [404]
+};
+const optionsRetryWithAcceptedOptions = {
+    uri: 'https://httpstat.us/500',
+    method: 'GET',
+    retry: true,
+    accepted: [404]
+};
 
 describe('request-promise-retry', function () {
     it('should  pass, with retry options', () => {
@@ -114,6 +126,17 @@ describe('request-promise-retry', function () {
         })
             .catch(error => {
                 expect(new Date() - startTime).to.be.above(0 + 30 + 300 + 3000);
+    });
+    it('should not retry, accepted options enabled', () => {
+        return rp(optionsDontRetryAcceptedOptions)
+            .catch(data => {
+                expect(data.accepted).equal(true);
+            });
+    });
+    it('should retry, accepted options enabled', () => {
+        return rp(optionsRetryWithAcceptedOptions)
+            .catch(data => {
+                expect(data.accepted).equal(false);
             });
     });
 });
