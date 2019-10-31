@@ -30,7 +30,7 @@ gulp.task('test', ['pre-test'], () => {
     const stream = gulp.src(['test/**/*.js'], { read: false })
         .pipe(mocha({
             ui: 'bdd',
-            timeout: 5000,
+            timeout: 100000,
             slow: 50,
             reporter: 'spec',
             recursive: true,
