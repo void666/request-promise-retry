@@ -114,6 +114,19 @@ describe('request-promise-retry', function () {
                 expect(data.error).equal(undefined);
             });
     });
+    it('should pass, retry with exponential backoff', () => {
+        // failure should take a bit of time to happen
+        const startTime = new Date();
+        return rp({
+            uri: 'http://adadadadad.com/',
+            method: 'GET',
+            retry: 4,
+            delay: 30,
+            factor: 10 // 0 + 30 + 300 + 3000
+        })
+            .catch(error => {
+                expect(new Date() - startTime).to.be.above(0 + 30 + 300 + 3000);
+    });
     it('should not retry, accepted options enabled', () => {
         return rp(optionsDontRetryAcceptedOptions)
             .catch(data => {
