@@ -35,14 +35,13 @@ class rpRetry {
                         err.accepted = true;
                         return Promise.reject(err);
                     }
-
                     logger.info(`Encountered error ${err.message} for ${options.method} request to ${options.uri}, retry count ${tryCount}`);
                     tryCount -= 1;
                     if (tryCount) {
                         return new Promise((resolve, reject) => {
                             setTimeout(() => {
                                 logger.debug(`waiting for ${delay} ms before next retry for ${options.uri}. Next wait ${delay * factor}`);
-                                resolve(fetchDataWithRetry(tryCount, delay * factor));
+                                return resolve(fetchDataWithRetry(tryCount, delay * factor));
                             }, delay);
                         });
                     }
