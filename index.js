@@ -1,7 +1,7 @@
 'use strict';
 const requestPromise = require('request-promise');
 const Promise = require('bluebird');
-const logger = require('./modules/logger')('request-promise-retry');
+const logger  = require('winston');
 
 class rpRetry {
     static _rpRetry(options) {
