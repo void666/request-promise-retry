@@ -123,10 +123,10 @@ describe('request-promise-retry', function () {
             retry: 4,
             delay: 30,
             factor: 10 // 0 + 30 + 300 + 3000
-        })
-            .catch(error => {
-                expect(new Date() - startTime).to.be.above(0 + 30 + 300 + 3000);
-    });
+        }).catch(error => {
+            expect(new Date() - startTime).to.be.above(0 + 30 + 300 + 3000);
+        });
+    })
     it('should not retry, accepted options enabled', () => {
         return rp(optionsDontRetryAcceptedOptions)
             .catch(data => {
