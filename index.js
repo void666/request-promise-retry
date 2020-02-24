@@ -1,7 +1,8 @@
 'use strict';
 const requestPromise = require('request-promise');
 const Promise = require('bluebird');
-const logger = require('./modules/logger')('request-promise-retry');
+
+let logger = require('./modules/logger')('request-promise-retry');
 
 class rpRetry {
     static _rpRetry(options) {
@@ -69,6 +70,10 @@ class rpRetry {
     }
 
     static rp(options) {
+        if (options.logger) {
+            logger = options.logger;
+            delete options.logger;
+        }
         if (options.retry) {
             if (typeof options.retry === 'number') {
                 if (options.retry < 0) {
