@@ -25,6 +25,7 @@ var options = {
     },
     json: true, // Automatically parses the JSON string in the response, 
     retry : 2, // will retry the call twice, in case of error.
+    logger: myLogger, // custom logger with 'info()' and 'debug()' functions, for example log4js logger
     verbose_logging : false, // will log errors only, if set to be true, will log all actions
     accepted: [ 400, 404 ] // Accepted HTTP Status codes (will not retry if request response has any of these HTTP Status Code)
     delay: 2000 // will delay retries by 2000 ms.  The default is 100. 
