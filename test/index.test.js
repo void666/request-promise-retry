@@ -2,12 +2,12 @@
 
 const rp = require('../index');
 const optionsWithRetryFail = {
-    uri: 'http://adadadadad.com/',
+    uri: 'http://thisurlshouldnevereverexist.com/',
     method: 'GET',
     retry: 3
 };
 const optionsWithoutRetryFail = {
-    uri: 'http://adadadadad.com/',
+    uri: 'http://thisurlshouldnevereverexist.com/',
     method: 'GET'
 };
 const optionsWithRetry = {
@@ -118,7 +118,7 @@ describe('request-promise-retry', function () {
         // failure should take a bit of time to happen
         const startTime = new Date();
         return rp({
-            uri: 'http://adadadadad.com/',
+            uri: 'http://thisurlshouldnevereverexist.com/',
             method: 'GET',
             retry: 4,
             delay: 30,
