@@ -40,7 +40,7 @@
     "coveralls": "^3.0.0",
     "req-cwd": "^2.0.0",
     "request": "^2.85.0",
-    "request-promise": "^4.2.2",
+    "request-promise": "^4.2.6",
     "winston": "^2.4.0"
   },
   "devDependencies": {
